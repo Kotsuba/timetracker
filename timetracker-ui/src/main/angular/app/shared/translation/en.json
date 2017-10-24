@@ -1,0 +1,34 @@
+{
+  "MENU": {
+    "REPORT": "Report",
+    "VACATION": "Vacation",
+    "PERFORMANCE": "Performance",
+    "LOGOUT": "Logout"
+  },
+  "ERRORS": {
+    "STATUS_CODE": "Status code:"
+  },
+  "SCOPE": {
+    "WEEK": "Week",
+    "MONTH": "Month",
+    "THREE_MONTH": "Three Month",
+    "HALF_YEAR": "Half-year",
+    "YEAR": "Year"
+  },
+  "METRIC": {
+    "INPROGRESS_COUNT": "inprogress ticket count",
+    "CLOSED_COUNT": "closed ticket count",
+    "FIXED_COUNT": "fixed ticket count",
+    "REOPENED_COUNT": "reopened ticket count",
+    "FIXED_CLOSED_COUNT": "fixed ticket count/closed ticket count",
+    "FIXED_CLOSED_TIME": "fixed ticket time/closed ticket time",
+    "INPROGRESS_ALL_COUNT": "inprogress ticket count/(closed ticket count + inprogress tickets count)",
+    "INPROGRESS_ALL_TIME": "inprogress ticket time/(closed ticket time + inprogress tickets time)",
+    "AVG_TIME_RESOLVED": "time spent on fixed ticket / fixed ticket count",
+    "AVG_TIME_UNRESOLVED": "time spent on closed ticket - time spent on fixed ticket) / (closed ticket count - fixed tickets count)",
+    "TICKET_FULL_TIME": "time spent on closed ticket + time spent on inprogress ticket) / (time spent on inprogress ticket + time spent on closed ticket + other help time)",
+    "USER_FULL_TIME": "time spent on inprogress ticket + time spent on closed ticket) / (time spent on inprogress ticket + dev time spent on closed ticket + user help time)",
+    "JIRA_TIMETRACKER_TIME": "jira logged time / timetracker logged time",
+    "DOOR_TIMETRACKER_TIME": "timetracker logged time / door time"
+  }
+}

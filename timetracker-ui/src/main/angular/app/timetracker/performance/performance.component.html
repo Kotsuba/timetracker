@@ -1,0 +1,15 @@
+<simple-notifications></simple-notifications>
+<div class="container" *ngIf="isUsersAvailable && loggedUser.userRole!=UserRole.USER">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">User:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="user" [(ngModel)]="user"
+                        (ngModelChange)="onUserChange()">
+                    <option *ngFor="let u of users" [ngValue]="u">{{u.name}}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<performance-by-user [userId]="user?user.id:loggedUser.user.id" *ngIf="isUserSelected"></performance-by-user>

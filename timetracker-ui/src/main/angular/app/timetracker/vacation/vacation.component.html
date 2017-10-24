@@ -1,0 +1,168 @@
+<simple-notifications></simple-notifications>
+<div class="container">
+    <form [formGroup]="vacationForm" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Worker:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="worker" [(ngModel)]="workedUser.id" formControlName="worker">
+                    <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+                </select>
+                <div class="alert alert-danger"
+                     *ngIf="vacationForm.controls['worker'].hasError('required') && (vacationForm.controls['worker'].touched || vacationForm.controls['worker'].dirty)">
+                    required
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Start date:</label>
+            <div class="col-sm-3">
+                <input class="form-control" [(ngModel)]="startDate" formControlName="startDate"
+                       ngui-datetime-picker
+                       date-only="true"/>
+                <div class="alert alert-danger"
+                     *ngIf="vacationForm.controls['startDate'].hasError('required') && (vacationForm.controls['startDate'].touched || vacationForm.controls['startDate'].dirty)">
+                    required
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">End date:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="endDate" [(ngModel)]="endDate"
+                       formControlName="endDate" ngui-datetime-picker
+                       date-only="true"/>
+                <div *ngIf="vacationForm.controls['endDate'].touched || vacationForm.controls['endDate'].dirty">
+                    <p class="alert alert-danger" *ngIf="vacationForm.controls['endDate'].hasError('required')">required</p>
+                    <p class="alert alert-danger" *ngIf="!isEndDateValid()">incorrect date format</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Duration:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="duration" [(ngModel)]="vacation.duration"
+                       formControlName="duration"/>
+                <div class="alert alert-danger"
+                     *ngIf="vacationForm.controls['duration'].hasError('required') && (vacationForm.controls['duration'].touched || vacationForm.controls['duration'].dirty)">
+                    required
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Payment :</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="payment" [(ngModel)]="vacation.payment"
+                       formControlName="payment"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Pay date :</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="payDate" [(ngModel)]="payDate"
+                       formControlName="payDate" ngui-datetime-picker
+                       date-only="true"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 col-sm-offset-5">
+                <div class="radio">
+                    <label class="control-label">
+                        <input #dayOffType type="radio" name="dayOffType"
+                               (change)="onChangeDayOffType(TypeVacation.PAID_VACATION)"
+                               [value]="TypeVacation.PAID_VACATION"
+                               [checked]="vacation.dayOffType===TypeVacation.PAID_VACATION"
+                               formControlName="dayOffType">Paid vacation
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="control-label">
+                        <input #dayOffType type="radio" name="dayOffType"
+                               (change)="onChangeDayOffType(TypeVacation.UNPAID_VACATION)"
+                               [value]="TypeVacation.UNPAID_VACATION"
+                               [checked]="vacation.dayOffType===TypeVacation.UNPAID_VACATION"
+                               formControlName="dayOffType">Unpaid vacation
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="control-label">
+                        <input #dayOffType type="radio" name="dayOffType"
+                               (change)="onChangeDayOffType(TypeVacation.ILLNESS)"
+                               [value]="TypeVacation.ILLNESS"
+                               [checked]="vacation.dayOffType===TypeVacation.ILLNESS" formControlName="dayOffType">Illness
+                    </label>
+                </div>
+                <div class="alert alert-danger"
+                     *ngIf="vacationForm.controls['dayOffType'].hasError('required') && (vacationForm.controls['dayOffType'].touched || vacationForm.controls['dayOffType'].dirty)">
+                    required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Comment:</label>
+            <div class="col-sm-3">
+                <textarea class="form-control " rows="5 " name="comment" [(ngModel)]="vacation.comment"
+                          formControlName="comment"></textarea>
+            </div>
+        </div>
+        <div class="form-group ">
+            <div class="col-sm-offset-5 col-sm-3">
+                <button type="submit " (click)="onSubmit();vacationForm.reset();" class="btn btn-default "
+                        [disabled]="!(vacationForm.valid && validForm)">Submit
+                </button>
+                <button type="button" (click)="vacationForm.reset();" class="btn btn-default ">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br><br><br>
+<div class="container">
+    <div class="row">
+        <label class="col-sm-offset-3 col-sm-2 control-label">Date:</label>
+        <div class="col-sm-3">
+            <input class="form-control" name="date" [(ngModel)]="date" (ngModelChange)="onDateChange()"
+                   ngui-datetime-picker
+                   date-only="true"/>
+        </div>
+    </div>
+    <br><br><br><br>
+    <table class="table table-striped" *ngIf="isDataAvailable">
+        <thead>
+        <tr>
+            <th>Worker</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Duration</th>
+            <th>Payment</th>
+            <th>Pay date</th>
+            <th>DayoffType</th>
+            <th>Comment</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let vacation of vacations">
+            <td>{{vacation.userId | userFormatter:users}}</td>
+            <td>{{vacation.startDate}}</td>
+            <td>{{vacation.endDate}}</td>
+            <td>{{vacation.duration}}</td>
+            <td>{{vacation.payment}}</td>
+            <td>{{vacation.payDate}}</td>
+            <td>{{vacation.dayOffType|dayOffTypeFormatter}}</td>
+            <td>{{vacation.comment}}</td>
+            <td>
+                <button [disabled]="loggedUser.userRole==UserRole.COMANAGER && permission(vacation.startDate)"
+                        (click)="loadDataInForm(vacation)">Edit
+                </button>
+            </td>
+            <td>
+                <button [disabled]="loggedUser.userRole==UserRole.COMANAGER && permission(vacation.startDate)"
+                        (click)="deleteVacation(vacation)">Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

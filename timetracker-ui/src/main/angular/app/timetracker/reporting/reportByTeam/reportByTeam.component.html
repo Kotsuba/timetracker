@@ -1,0 +1,31 @@
+<div class="container">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Scope:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="user" [(ngModel)]="scope"
+                        (ngModelChange)="onScopeChange()">
+                    <option *ngFor="let s of scopes" [ngValue]="s">{{s.name | translate}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Metric:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="metric" [(ngModel)]="metric"
+                        (ngModelChange)="onMetricChange()">
+                    <option *ngFor="let metric of metrics" [ngValue]="metric">{{metric.name}} {{metric.dimension}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="container" *ngFor="let chart of chartsInfo">
+        <div class="row">
+            <label class="control-label">{{chart.title}}</label>
+            <div class="col-sm-12">
+                <chart [data]="chart.data" [labels]="chart.labels" [options]="chart.options"></chart>
+            </div>
+        </div>
+    </div>
+</div>

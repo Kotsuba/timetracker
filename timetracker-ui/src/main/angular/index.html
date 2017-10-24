@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>WR Time Tracker - вход в систему</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/chart.js/src/chart.js"></script>
+    <script src="systemjs.config.js"></script>
+
+    <link href="http://10.10.144.200/timetracker/default.css" rel="stylesheet" type="text/css">
+    <script>
+        System.import('app').catch(function (err) {
+            console.error(err);
+        });
+    </script>
+</head>
+<body>
+    <app></app>
+</body>
+</html>

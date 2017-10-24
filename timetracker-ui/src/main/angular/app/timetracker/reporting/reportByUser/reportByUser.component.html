@@ -1,0 +1,45 @@
+<simple-notifications></simple-notifications>
+<div class="container">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Scope:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="user" [(ngModel)]="scope"
+                        (ngModelChange)="onScopeChange()">
+                    <option *ngFor="let s of scopes" [ngValue]="s">{{s.name | translate}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-offset-3 col-sm-2 control-label">Tickets:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="user" [(ngModel)]="report"
+                        (ngModelChange)="onTicketChange()">
+                    <option *ngFor="let r of reports" [ngValue]="r">{{r.date}}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="container" *ngIf="isDataAvailable">
+        <div class="row">
+            <div class="col-sm-12">
+                <chart [data]="chartTicketCountData" [labels]="labels" [options]="ticketCountOptions"></chart>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <chart [data]="chartAvgTicketCountData" [labels]="labels" [options]="avgTicketCountOptions"></chart>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <chart [data]="chartAvgTimeTicketData" [labels]="labels" [options]="avgTimeTicketOptions"></chart>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <chart [data]="chartOtherMetricData" [labels]="labels" [options]="otherMetricOptions"></chart>
+            </div>
+        </div>
+    </div>
+</div>
