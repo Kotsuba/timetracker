@@ -11,9 +11,6 @@
 
     <artifactId>timetracker-ui</artifactId>
     <version>1.0</version>
-    <properties>
-        <angular.path>src/main/angular</angular.path>
-    </properties>
     <packaging>war</packaging>
 
     <build>
@@ -26,11 +23,12 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <webResources>
                         <resource>
-                            <directory>${angular.path}</directory>
+                            <directory>angular/dist</directory>
                         </resource>
                     </webResources>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -40,7 +38,7 @@
                         <id>exec-npm-install</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <workingDirectory>${angular.path}</workingDirectory>
+                            <workingDirectory>angular</workingDirectory>
                             <executable>npm</executable>
                             <arguments>
                                 <argument>install</argument>
@@ -51,14 +49,14 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>exec-npm-run-tsc</id>
+                        <id>exec-npm-run-build</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <workingDirectory>${angular.path}</workingDirectory>
+                            <workingDirectory>angular</workingDirectory>
                             <executable>npm</executable>
                             <arguments>
                                 <argument>run</argument>
-                                <argument>tsc</argument>
+                                <argument>build</argument>
                             </arguments>
                         </configuration>
                         <goals>
@@ -69,6 +67,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
