@@ -22,7 +22,6 @@ export class VacationService {
     }
 
     addVacation(vacation: Vacation) {
-        console.log(UtilService.getJSONBody(vacation));
         let headers=this.utilService.getHeaders();
         headers.set('Content-type','application/json');
         return this.http.post(ApiConstants.VACATION,
@@ -31,7 +30,6 @@ export class VacationService {
     }
 
     editVacation(vacation: Vacation) {
-        console.log(UtilService.getJSONBody(vacation));
         let headers=this.utilService.getHeaders();
         headers.set('Content-type','application/json');
         return this.http.put(ApiConstants.VACATION + "/" + vacation.id,

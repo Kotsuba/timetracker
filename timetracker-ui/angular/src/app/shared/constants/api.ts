@@ -1,5 +1,5 @@
 export class ApiConstants {
-    private static API = '/api';
+    private static API = 'timetracker/api';
     public static VACATION: string = ApiConstants.API + '/vacations';
     public static USERS: string = ApiConstants.API + '/users';
     public static USER: string = ApiConstants.USERS + '/user';
